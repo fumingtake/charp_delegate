@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -11,26 +12,27 @@ namespace WindowsFormsApp1
     /// </summary>
     internal class Class1
     {
-        internal void Output(string sPara)
+        internal void Output(Form1 oForm, string sPara)
         {
 
             //デリゲートで受け取るメソッドを呼び出す
-            Output(WriteHello, sPara);
+            Output(oForm, WriteHello, sPara);
         }
 
         //デリゲートの型
-        internal delegate void WriteString(string s);
+        internal delegate void WriteString(Form1 oForm, string s);
 
         //デリゲートを使用するクラス
-        internal void Output(WriteString method, string s)
+        internal void Output(Form1 oForm, WriteString method, string s)
         {
-            method(s);
+            method(oForm, s);
         }
 
         //デリゲートで起動したい処理
-        static void WriteHello(string s)
+        private void WriteHello(Form1 oForm, string s)
         {
-            Console.WriteLine("Hello, " + s);
+            string s1 = oForm.AddStringToTextBox1Method("Hello, " + s);
+            MessageBox.Show(s1);
         }
     }
 }

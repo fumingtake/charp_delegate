@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static WindowsFormsApp1.Class1;
 
 namespace WindowsFormsApp1
@@ -20,14 +21,15 @@ namespace WindowsFormsApp1
             moWriteStringHander = new WriteString(WriteHowAreYou);
         }
 
-        private void WriteHowAreYou(string s)
+        private void WriteHowAreYou(Form1 oForm, string s)
         {
-            Console.WriteLine("How are you? " + s);
+            string s2 = oForm.AddStringToTextBox1Method("How are you? " + s);
+            MessageBox.Show(s2);
         }
 
-        internal void Output(Class1 o, string s)
+        internal void Output(Form1 oForm, Class1 o, string s)
         {
-            o.Output(moWriteStringHander, s);
+            o.Output(oForm, moWriteStringHander, s);
         }
     }
 }
