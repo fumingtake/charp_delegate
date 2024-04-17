@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -19,6 +13,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.textBox1.Text = "";
             //別スレッドで処理＋別スレッドでForm描画する場合はInvokeを使ってFormのスレッドで描画する。
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += ProcButton1;
@@ -45,7 +40,9 @@ namespace WindowsFormsApp1
         {
             if(this.InvokeRequired)
             {
-                return (string)this.Invoke(new AddStringToTextBox1(AddStringToTextBox1Method), new object[] { text });
+                //return (string)this.Invoke(new AddStringToTextBox1(AddStringToTextBox1Method), new object[] { text });
+                //newしなくても下記でOK
+                return (string)this.Invoke((AddStringToTextBox1)AddStringToTextBox1Method, new object[] { text });
             }
 
             this.textBox1.Text += text;
